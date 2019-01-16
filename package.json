@@ -1,0 +1,20 @@
+{
+  "devDependencies": {
+    "@types/apicache": "^1.2.0",
+    "@types/express": "^4.16.0",
+    "@types/node": "^10.12.18",
+    "@types/node-fetch": "^2.1.4",
+    "tslint": "^5.12.0",
+    "tslint-config-standard": "^8.0.1",
+    "typescript": "^3.2.2"
+  },
+  "scripts": {
+    "build": "tsc"
+  },
+  "dependencies": {
+    "apicache": "^1.2.3",
+    "express": "^4.16.4",
+    "node-fetch": "^2.3.0",
+    "unsplash-js": "^4.8.0"
+  }
+}
