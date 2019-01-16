@@ -16,7 +16,7 @@ app.use(function(req, res, next) {
   next()
 })
 
-app.get('/api/random', /*cache('1 minute'),*/ (req, res) => {
+app.get('/api/random', cache('1 minute'), (req, res) => {
   console.log('got a req')
   unsplash.photos.getRandomPhoto({ collections: [ 1235504 ] })
     .then(toJson)
