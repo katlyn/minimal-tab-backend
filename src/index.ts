@@ -29,6 +29,32 @@ app.get('/api/random', cache('1 minute'), (req, res) => {
     }))
 })
 
+app.get('/api/random/landscape', cache('1 minute'), (req, res) => {
+  console.log('got a req')
+  unsplash.photos.getRandomPhoto({ collections: [ 1235504 ], orientation: 'landscape' })
+    .then(toJson)
+    .then(image => res.json({
+      url: image.urls.raw,
+      credit: {
+        name: image.user.name,
+        url: image.links.html
+      }
+    }))
+})
+
+app.get('/api/random/portrait', cache('1 minute'), (req, res) => {
+  console.log('got a req')
+  unsplash.photos.getRandomPhoto({ collections: [ 1235504 ], orientation: 'portrait' })
+    .then(toJson)
+    .then(image => res.json({
+      url: image.urls.raw,
+      credit: {
+        name: image.user.name,
+        url: image.links.html
+      }
+    }))
+})
+
 app.get('/api/random/bulk', cache('10 minutes'), (req, res) => {
   unsplash.photos.getRandomPhoto({
     collections: [ 1235504 ],
