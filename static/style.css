@@ -1,0 +1,59 @@
+@import url('https://fonts.googleapis.com/css?family=Fira+Mono');
+
+body {
+  background-size: cover;
+  font-family: 'Fira Mono', monospace;
+}
+
+#overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgb(0, 0, 0);
+  transition: background-color 1s ease-out;
+}
+
+#overlay.transparent {
+  background: rgba(0, 0, 0, 0.85);
+}
+
+#content {
+  position: absolute;
+  color: #ffffff00;
+  transition: color 1s ease-out 0.5s;
+
+  padding-left: 30px;
+  padding-right: 30px;
+
+  top: 0;
+  left: 0;
+  right: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  height: 100vh;
+}
+
+#content.show {
+  color: #fff
+}
+
+.main {
+  flex-grow: 1;
+}
+
+.footer {
+  flex-basis: 30px;
+  text-align: right;
+}
+
+a {
+  color: inherit;
+}
+
+p {
+  max-width: 67vw;
+}
