@@ -17,8 +17,15 @@ app.use(function(req, res, next) {
 })
 
 app.get('/api/random', cache('1 minute'), (req, res) => {
-  console.log('got a req')
-  unsplash.photos.getRandomPhoto({ collections: [ 1235504 ] })
+  let orientation
+  if (req.query && req.query.orientation) {
+    if (req.query.orientation === 'landscape') {
+      orientation = 'landscape'
+    } else if (req.query.orientation === 'portrait') {
+      orientation = 'portrait'
+    }
+  }
+  unsplash.photos.getRandomPhoto({ collections: [ 1235504 ], orientation })
     .then(toJson)
     .then(image => res.json({
       url: image.urls.raw,
@@ -56,9 +63,18 @@ app.get('/api/random/portrait', cache('1 minute'), (req, res) => {
 })
 
 app.get('/api/random/bulk', cache('10 minutes'), (req, res) => {
+  let orientation
+  if (req.query && req.query.orientation) {
+    if (req.query.orientation === 'landscape') {
+      orientation = 'landscape'
+    } else if (req.query.orientation === 'portrait') {
+      orientation = 'portrait'
+    }
+  }
   unsplash.photos.getRandomPhoto({
     collections: [ 1235504 ],
-    count: 30
+    count: 30,
+    orientation
   })
     .then(toJson)
     .then(images => {
