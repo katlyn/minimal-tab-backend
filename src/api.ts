@@ -7,7 +7,7 @@ import fastifyCaching from "@fastify/caching";
 
 const orientationSchema = {
   querystring: Type.Object({
-    orientation: Type.Union([Type.Literal("landscape"), Type.Literal("portrait")])
+    orientation: Type.Optional(Type.Union([Type.Literal("landscape"), Type.Literal("portrait")]))
   })
 }
 
@@ -21,7 +21,7 @@ const api: FastifyPluginAsyncTypebox = async function (fastify): Promise<void> {
   fastify.get("/random", {
     schema: orientationSchema
   }, async request => {
-    const [image] = await getRandomImages(1)
+    const [image] = await getRandomImages(1, request.query.orientation)
 
     return {
       url: image.urls.raw,
@@ -35,7 +35,7 @@ const api: FastifyPluginAsyncTypebox = async function (fastify): Promise<void> {
   fastify.get("/random/bulk", {
     schema: orientationSchema
   }, async request => {
-    const images = await getRandomImages(10)
+    const images = await getRandomImages(10, request.query.orientation)
 
     return images.map(image => ({
       url: image.urls.raw,

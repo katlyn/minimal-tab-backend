@@ -12,7 +12,8 @@ export const unsplash = createUnsplashClient({
 export async function getRandomImages (count: number, orientation?: "landscape"|"portrait") {
   const { type: status, response: images } = await unsplash.photos.getRandom({
     collectionIds: ["1235504"],
-    orientation: orientation
+    orientation: orientation,
+    count
   })
 
   if (status === "error") {
