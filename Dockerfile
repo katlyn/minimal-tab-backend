@@ -1,19 +1,17 @@
-FROM node:10-alpine
+FROM node:20-alpine AS base
+WORKDIR /usr/src/minimal-tab
+RUN npm i -g pnpm
+COPY package.json pnpm-lock.yaml tsconfig.json ./
 
-RUN apk add git
+FROM base AS build
+RUN pnpm i --frozen-lockfile
+COPY ./src ./src
+RUN pnpm build
 
-RUN mkdir /usr/web
-WORKDIR /usr/web
+FROM base AS deploy
+COPY static ./static
+RUN pnpm i --frozen-lockfile --prod
+COPY --from=build /usr/src/minimal-tab/dist ./dist
 
-COPY package.json /usr/web
-COPY yarn.lock /usr/web
-
-RUN yarn
-
-COPY ./src /usr/web/src
-COPY ./tsconfig.json /usr/web
-
-RUN yarn build
-
-CMD [node, dist/index.js]
+CMD [ "pnpm", "start" ]
 

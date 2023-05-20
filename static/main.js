@@ -5,7 +5,7 @@ const transition = {
         document.body.style.backgroundSize = 'cover'
         let overlay = document.getElementById('overlay')
         let content = document.getElementById('content')
-        
+
         let overlayPromise = new Promise(overlayRes => {
           overlay.addEventListener('transitionend', () => {
             overlayRes()
@@ -29,7 +29,7 @@ const transition = {
       return new Promise(res => {
         let overlay = document.getElementById('overlay')
         let content = document.getElementById('content')
-        
+
         let overlayPromise = new Promise(overlayRes => {
           overlay.addEventListener('transitionend', () => {
             overlayRes()
@@ -51,7 +51,7 @@ const transition = {
     }
   }
 
-fetch(`https://minimal.gordhoard.org/api/random/${(window.innerWidth > window.innerHeight) ? 'landscape' : 'portrait'}`)
+fetch(`/api/random/${(window.innerWidth > window.innerHeight) ? 'landscape' : 'portrait'}`)
   .then(res => { return res.json() })
   .then(currentImage => {
     const credits = document.getElementById('image-credits')

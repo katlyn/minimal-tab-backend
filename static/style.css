@@ -16,7 +16,7 @@ body {
 }
 
 #overlay.transparent {
-  background: rgba(0, 0, 0, 0.85);
+  background: rgba(0, 0, 0, 0.75);
 }
 
 #content {
